@@ -107,9 +107,29 @@ df['countryCode'] = df['countryCode'].astype(str)
 - Verified no missing values and no invalid dates (e.g., settlement before invoice).
 - No duplicates found.
 
-## Data Analysis
 ## Exploratory Data Analysis (EDA)
 - Generated summary statistics for numerical variables (`InvoiceAmount`, `DaysToSettle`, `DaysLate`).
+
+```sql
+numeric_cols = df.select_dtypes(include=['number'])
+```
+```sql
+numeric_summary = numeric_cols.describe().round(2)
+print(numeric_summary)
+```
+```
+```text
+      InvoiceAmount  DaysToSettle  DaysLate
+count        2466.00       2466.00   2466.00
+mean           59.90         26.44      3.44
+std            20.44         12.33      6.29
+min             5.26          0.00      0.00
+25%            46.40         18.00      0.00
+50%            60.56         26.00      0.00
+75%            73.76         35.00      5.00
+max           128.28         75.00     45.00
+```
+
 - Visualized:
   - Distribution of payment delays (histogram)
   - Correlation heatmap of key behavioral factors
@@ -119,7 +139,37 @@ df['countryCode'] = df['countryCode'].astype(str)
 - Customer-level aggregation: late payment ratio, average delay, transaction frequency.
 
 ## Analysis Performed
-- **Correlation analysis**: Strongest positive correlation between disputes and delays (0.44); moderate negative correlation with electronic billing (−0.16).
+* **Correlation analysis**: 
+
+```sql
+  heatmap_cols = [
+    'DaysLate',
+    'TransactionFrequency',
+    'InvoiceAmount',
+    'Disputed',
+    'PaperlessBill']
+  ```
+```sql
+heatmap_data = df[heatmap_cols].copy()
+heatmap_data['Disputed'] = heatmap_data['Disputed'].map({'Yes': 1, 'No': 0})
+heatmap_data['PaperlessBill'] = heatmap_data['PaperlessBill'].map({'Paper': 0, 'Electronic': 1})
+```
+```sql
+plt.figure(figsize=(8,6))
+sns.heatmap(
+    heatmap_data.corr(),
+    annot=True,
+    cmap='YlOrBr',
+    fmt='.2f'
+)
+plt.title('Correlation Heatmap of Customer Behavior and Payment Risk')
+plt.show()
+```
+
+<img width="398" height="334" alt="image" src="https://github.com/user-attachments/assets/1ffde93d-2068-4187-b0a7-844ad70aedbd" />
+
+> Strongest positive correlation between disputes and delays (0.44); moderate negative correlation with electronic billing (−0.16).
+ 
 - **Group comparisons**: Disputed invoices average ~10 days late vs. ~2 days for non-disputed; electronic bills paid ~2 days earlier.
 - **Seasonality**: Clear annual cycle with peak invoicing in March–April and sharp decline toward year-end.
 - **Customer segmentation**: Created risk groups (High/Medium/Low) based on late payment ratio and average delay.
