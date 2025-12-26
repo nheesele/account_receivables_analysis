@@ -88,7 +88,7 @@ Data columns (total 12 columns):
  11  DaysLate       2466 non-null   int64  
 dtypes: float64(1), int64(4), object(7)
 ```
-Upon reviewing df.info(), the dataset has 2,466 records across 12 columns with no missing values. However, a few data types should be adjusted for better analysis::
+Upon reviewing df.info(), the dataset has 2,466 records across 12 columns with no missing values. However, a few data types should be adjusted for better analysis:
 
 * Convert date columns (`PaperlessDate`, `InvoiceDate`, `DueDate`, `SettledDate`) from object to datetime.
 * Change `invoiceNumber`, `countryCode` from int64 to object (string), as it is an identifier.
