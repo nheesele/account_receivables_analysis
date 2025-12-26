@@ -150,12 +150,6 @@ df['countryCode'] = df['countryCode'].astype(str)
 4. **Prepare for seasonality**: Build cash reserves in low-volume periods and intensify collections during peak months.
 5. **Monitor high-risk customers** identified in the segmentation for proactive follow-up.
 
-## Repository Contents
-- `final_project_leyennhi.py` — Full analysis script (converted from Colab notebook)
-- `AR dataset.xlsx` — Cleaned and enriched dataset
-
----
-
 **Author**: Le Yen Nhi  
 **Date**: December 2025
 
