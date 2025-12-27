@@ -168,7 +168,7 @@ plt.title('Correlation Heatmap of Customer Behavior and Payment Risk')
 plt.show()
 ```
 
-<img width="398" height="334" alt="image" src="https://github.com/user-attachments/assets/1ffde93d-2068-4187-b0a7-844ad70aedbd" />
+![](https://github.com/nheesele/account_receivables_analysis/blob/main/correlation_heatmap.png)
 
 > Strongest positive correlation between disputes and delays (0.44); moderate negative correlation with electronic billing (−0.16).
  
