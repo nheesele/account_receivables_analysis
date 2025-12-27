@@ -200,6 +200,6 @@ plt.show()
 4. **Prepare for seasonality**: Build cash reserves in low-volume periods and intensify collections during peak months.
 5. **Monitor high-risk customers** identified in the segmentation for proactive follow-up.
 
-**Author**: Le Yen Nhi  
+**Author**: Nhi Le
 **Date**: December 2025
 
