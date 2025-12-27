@@ -201,5 +201,6 @@ plt.show()
 5. **Monitor high-risk customers** identified in the segmentation for proactive follow-up.
 
 **Author**: Nhi Le
+
 **Date**: December 2025
 
