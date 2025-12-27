@@ -68,7 +68,7 @@ df.info()
 
 ### Data Summary
 
-```text
+```
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 2466 entries, 0 to 2465
 Data columns (total 12 columns):
