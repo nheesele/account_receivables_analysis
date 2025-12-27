@@ -117,7 +117,7 @@ numeric_cols = df.select_dtypes(include=['number'])
 numeric_summary = numeric_cols.describe().round(2)
 print(numeric_summary)
 ```
-```
+
 ```
       InvoiceAmount  DaysToSettle  DaysLate
 count        2466.00       2466.00   2466.00
