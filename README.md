@@ -118,7 +118,7 @@ numeric_summary = numeric_cols.describe().round(2)
 print(numeric_summary)
 ```
 ```
-```text
+```
       InvoiceAmount  DaysToSettle  DaysLate
 count        2466.00       2466.00   2466.00
 mean           59.90         26.44      3.44
