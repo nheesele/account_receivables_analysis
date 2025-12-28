@@ -181,6 +181,10 @@ plt.show()
 - R-squared = 0.225
 - Significant predictors: `Disputed` (p < 0.001) and `PaperlessBill` (p < 0.001)
 
+> *The R-squared is relatively low because the current dataset includes only a limited set of observable variables, while late payment behavior is influenced by many other factors that are not captured in the data, such as customer credit scores, industry characteristics, detailed contract terms, or specific dispute resolution processes.*
+
+> *Therefore, this model is designed to identify the key drivers of late payment within the scope of the available data, rather than to explain all possible causes of payment delays.*
+
 ## Key Insights
 - Most invoices are paid on time; average delay (~3.4 days) is driven by outliers.
 - **Disputes** are the primary driver of late payments (+6.67 days on average).
@@ -201,6 +205,8 @@ plt.show()
  - Offer incentives or extended credit to reliable regions (e.g., Country 391).
 4. **Prepare for seasonality**: Build cash reserves in low-volume periods and intensify collections during peak months.
 5. **Monitor high-risk customers** identified in the segmentation for proactive follow-up.
+
+> *This analysis serves as a foundational step. Once the key drivers are well understood, the business can further develop predictive models or early warning systems if needed.*
 
 **Author**: Nhi Le
 
