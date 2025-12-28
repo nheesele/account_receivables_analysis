@@ -306,8 +306,9 @@ Notes:
 
 > *This analysis serves as a foundational step. Once the key drivers are well understood, the business can further develop predictive models or early warning systems if needed.*
 
-##**Google Colab**:
+## **Google Colab**:
 Visit the related google colab at the link below:
+
 [Finance Factoring AR Analysis](https://colab.research.google.com/drive/1yzQ1Q1MVyDk3ApUhBc-DcuhGV4xJvI3H?usp=sharing)
 
 **Author**: Nhi Le
