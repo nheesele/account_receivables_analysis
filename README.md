@@ -167,15 +167,113 @@ sns.heatmap(
 plt.title('Correlation Heatmap of Customer Behavior and Payment Risk')
 plt.show()
 ```
-
 ![](https://github.com/nheesele/account_receivables_analysis/blob/main/correlation_heatmap.png)
 
 > Strongest positive correlation between disputes and delays (0.44); moderate negative correlation with electronic billing (−0.16).
  
-- **Group comparisons**: Disputed invoices average ~10 days late vs. ~2 days for non-disputed; electronic bills paid ~2 days earlier.
+- **Group comparisons**: Disputed invoices average ~8.5 days late vs. ~2 days for non-disputed; electronic bills paid ~2 days earlier.
+
+ | Disputed   |   DaysLate |
+ |-----------|-----------|
+ | No         |       1.93 |
+ | Yes        |       8.58 |
+
+| PaperlessBill   |   DaysLate |
+|-----------------|------------|
+| Electronic      |       2.39 |
+| Paper           |       4.44 |
+  
 - **Seasonality**: Clear annual cycle with peak invoicing in March–April and sharp decline toward year-end.
+
+![]('https://github.com/nheesele/account_receivables_analysis/blob/main/Delaybymonth.png')
+
+> The time-series analysis reveals a strong **annual seasonal pattern** in monthly invoiced amounts. In both 2012 and 2013, invoicing peaks sharply in **March–April**, followed by a steady decline throughout the year, reaching near-zero levels by year-end.
+
+> Notably, 2013 exhibits lower peaks and a steeper decline compared to 2012, suggesting a reduction in overall business volume or customer activity.
+
+> **Recommendation**: To manage cash flow effectively, the company should build reserves during low periods, intensify collection efforts in peak months, and consider seasonal adjustments to credit terms or sales incentives.
+
 - **Customer segmentation**: Created risk groups (High/Medium/Low) based on late payment ratio and average delay.
+
+```sql
+TotalInvoices = df['customerID'].value_counts()
+LateInvoices = df[df['DaysLate'] > 0]['customerID'].value_counts()
+customer_df['LateRatio'] = customer_df['LateInvoices'] / customer_df['TotalInvoices']
+```
+```sql
+avg_days_late = df.groupby('customerID')['DaysLate'].mean()
+customer_df['AvgDaysLate'] = avg_days_late
+```
+```sql
+customer_df['RiskGroup'] = np.where(
+    (customer_df['LateRatio'] > 0.5) | (customer_df['AvgDaysLate'] > 10),
+    'High Risk',
+    np.where(
+        customer_df['LateRatio'] > 0.2,
+        'Medium Risk',
+        'Low Risk'))
+```
+```sql
+customer_df['RiskGroup'].value_counts()
+```
+ | RiskGroup   |   count |
+ |-------------|---------|
+ | Low Risk    |      45 |
+ | High Risk   |      34 |
+ | Medium Risk |      21 |
+ 
+
 - **Statistical modeling**: Multiple linear regression (OLS) predicting `DaysLate`:
+
+```sql
+X = df_model[
+    ['InvoiceAmount', 'Disputed', 'PaperlessBill', 'TransactionFrequency']]
+y = df_model['DaysLate']
+
+X = X.apply(pd.to_numeric, errors='coerce')
+y = pd.to_numeric(y, errors='coerce')
+
+df_ols = pd.concat([X, y], axis=1).dropna()
+
+X = df_ols[X.columns]
+y = df_ols['DaysLate']
+
+X = sm.add_constant(X)
+
+model = sm.OLS(y, X).fit()
+print(model.summary())
+```
+```
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               DaysLate   R-squared:                       0.225
+Model:                            OLS   Adj. R-squared:                  0.223
+Method:                 Least Squares   F-statistic:                     178.3
+Date:                Thu, 25 Dec 2025   Prob (F-statistic):          2.93e-134
+Time:                        13:30:06   Log-Likelihood:                -7720.0
+No. Observations:                2466   AIC:                         1.545e+04
+Df Residuals:                    2461   BIC:                         1.548e+04
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+========================================================================================
+                           coef    std err          t      P>|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+const                    3.9573      0.695      5.691      0.000       2.594       5.321
+InvoiceAmount           -0.0008      0.006     -0.138      0.891      -0.012       0.010
+Disputed                 6.6684      0.269     24.762      0.000       6.140       7.196
+PaperlessBill           -2.0422      0.225     -9.094      0.000      -2.483      -1.602
+TransactionFrequency    -0.0387      0.023     -1.656      0.098      -0.085       0.007
+==============================================================================
+Omnibus:                      815.737   Durbin-Watson:                   2.061
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             2767.849
+Skew:                           1.649   Prob(JB):                         0.00
+Kurtosis:                       7.008   Cond. No.                         423.
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+```
+
   `DaysLate = 3.9573 - 0.0008×InvoiceAmount + 6.6684×Disputed - 2.0422×PaperlessBill - 0.0387×TransactionFrequency`
   
 - R-squared = 0.225
