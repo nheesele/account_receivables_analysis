@@ -185,7 +185,7 @@ plt.show()
   
 - **Seasonality**: Clear annual cycle with peak invoicing in March–April and sharp decline toward year-end.
 
-![]('https://github.com/nheesele/account_receivables_analysis/blob/main/Delaybymonth.png')
+![](https://github.com/nheesele/account_receivables_analysis/blob/main/Delaybymonth.png)
 
 > The time-series analysis reveals a strong **annual seasonal pattern** in monthly invoiced amounts. In both 2012 and 2013, invoicing peaks sharply in **March–April**, followed by a steady decline throughout the year, reaching near-zero levels by year-end.
 
