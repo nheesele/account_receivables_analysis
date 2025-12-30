@@ -193,6 +193,17 @@ plt.show()
 
 > **Recommendation**: To manage cash flow effectively, the company should build reserves during low periods, intensify collection efforts in peak months, and consider seasonal adjustments to credit terms or sales incentives.
 
+- **Region**:
+![](https://github.com/nheesele/account_receivables_analysis/blob/main/img/DelaybyCountry.png)
+
+>* **Country 818** has the highest payment delays
+Average 4.82 days late -> potential collection challenges in this region.
+-> Implement earlier reminders, automated follow-up emails, or assign dedicated collectors to monitor invoices from this area more closely.
+
+>* **Country 391** performs the best
+Lowest average delay at only 1.85 days -> customers from this country pay fastest and most reliably.
+-> Offer extended credit limits or reduced deposit requirements to encourage higher sales volume.
+
 - **Customer segmentation**: Created risk groups (High/Medium/Low) based on late payment ratio and average delay.
 
 ```sql
