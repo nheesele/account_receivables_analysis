@@ -173,15 +173,30 @@ plt.show()
  
 - **Group comparisons**: Disputed invoices average ~8.5 days late vs. ~2 days for non-disputed; electronic bills paid ~2 days earlier.
 
- | Disputed   |   DaysLate |
- |-----------|-----------|
- | No         |       1.93 |
- | Yes        |       8.58 |
+     | Disputed   |   DaysLate |
+     |-----------|-----------|
+     | No         |       1.93 |
+     | Yes        |       8.58 |
 
-| PaperlessBill   |   DaysLate |
-|-----------------|------------|
-| Electronic      |       2.39 |
-| Paper           |       4.44 |
+Let's see how different between disputed and non disputed invoices:
+
+  ![](img/boxplot.png)
+
+**Non-disputed invoices** are mostly paid on time, with the median ***close to zero*** and an extremely small IQR, indicating that payment behavior in this group is highly consistent.
+
+In contrast, **disputed invoices** exhibit much ***longer delays*** and substantially higher variability. The median delay is around 7–8 days, and the IQR is wide, showing that the middle 50% of disputed invoices fall roughly between 0 and 15 days late.
+
+Regarding **outliers**, both groups contain extreme cases: 
+* Disputed invoices show very large outliers, with delays reaching approximately 45 days, reflecting prolonged dispute resolution in certain cases. 
+
+* Although non-disputed invoices typically have near-zero delays, they also present several outliers (up to around 35 days), indicating that late payments can still occur even without formal disputes, though these cases are relatively rare.
+
+Overall, the wider IQR and more extreme outliers in the disputed group reinforce the conclusion that disputes not only increase average payment delay but also introduce greater uncertainty into the payment cycle.
+
+    | PaperlessBill   |   DaysLate |
+    |-----------------|------------|
+    | Electronic      |       2.39 |
+    | Paper           |       4.44 |
   
 - **Seasonality**: Clear annual cycle with peak invoicing in March–April and sharp decline toward year-end.
 
