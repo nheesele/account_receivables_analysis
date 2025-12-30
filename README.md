@@ -1,5 +1,5 @@
 # ACCOUNT RECEIVABLES ANALYSIS
-![](https://github.com/nheesele/account_receivables_analysis/blob/main/accounts-receivable-la-gi.jpeg)
+![](https://github.com/nheesele/account_receivables_analysis/blob/main/img/accounts-receivable-la-gi.jpeg)
 
 > Source: https://bizzi.vn/wp-content/uploads/2025/04/accounts-receivable-la-gi.jpeg
 
@@ -167,7 +167,7 @@ sns.heatmap(
 plt.title('Correlation Heatmap of Customer Behavior and Payment Risk')
 plt.show()
 ```
-![](https://github.com/nheesele/account_receivables_analysis/blob/main/correlation_heatmap.png)
+![](https://github.com/nheesele/account_receivables_analysis/blob/main/img/correlation_heatmap.png)
 
 > Strongest positive correlation between disputes and delays (0.44); moderate negative correlation with electronic billing (−0.16).
  
@@ -185,7 +185,7 @@ plt.show()
   
 - **Seasonality**: Clear annual cycle with peak invoicing in March–April and sharp decline toward year-end.
 
-![](https://github.com/nheesele/account_receivables_analysis/blob/main/Delaybymonth.png)
+![](https://github.com/nheesele/account_receivables_analysis/blob/main/img/Delaybymonth.png)
 
 > The time-series analysis reveals a strong **annual seasonal pattern** in monthly invoiced amounts. In both 2012 and 2013, invoicing peaks sharply in **March–April**, followed by a steady decline throughout the year, reaching near-zero levels by year-end.
 
